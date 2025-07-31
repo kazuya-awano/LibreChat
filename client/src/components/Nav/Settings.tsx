@@ -11,11 +11,10 @@ import {
   General,
   Account,
   Balance,
-  Speech,
   Data,
   Chat,
 } from './SettingsTabs';
-import { GearIcon, DataIcon, SpeechIcon, UserIcon, PersonalizationIcon } from '~/components/svg';
+import { GearIcon, DataIcon, UserIcon, PersonalizationIcon } from '~/components/svg';
 import usePersonalizationAccess from '~/hooks/usePersonalizationAccess';
 import { useMediaQuery, useLocalize, TranslationKeys } from '~/hooks';
 import { cn } from '~/utils';
@@ -33,7 +32,6 @@ export default function Settings({ open, onOpenChange }: TDialogProps) {
       SettingsTabValues.GENERAL,
       SettingsTabValues.CHAT,
       SettingsTabValues.COMMANDS,
-      SettingsTabValues.SPEECH,
       ...(hasAnyPersonalizationFeature ? [SettingsTabValues.PERSONALIZATION] : []),
       SettingsTabValues.DATA,
       ...(startupConfig?.balance?.enabled ? [SettingsTabValues.BALANCE] : []),
@@ -80,11 +78,6 @@ export default function Settings({ open, onOpenChange }: TDialogProps) {
       value: SettingsTabValues.COMMANDS,
       icon: <Command className="icon-sm" />,
       label: 'com_nav_commands',
-    },
-    {
-      value: SettingsTabValues.SPEECH,
-      icon: <SpeechIcon className="icon-sm" />,
-      label: 'com_nav_setting_speech',
     },
     ...(hasAnyPersonalizationFeature
       ? [
@@ -221,9 +214,6 @@ export default function Settings({ open, onOpenChange }: TDialogProps) {
                     </Tabs.Content>
                     <Tabs.Content value={SettingsTabValues.COMMANDS}>
                       <Commands />
-                    </Tabs.Content>
-                    <Tabs.Content value={SettingsTabValues.SPEECH}>
-                      <Speech />
                     </Tabs.Content>
                     {hasAnyPersonalizationFeature && (
                       <Tabs.Content value={SettingsTabValues.PERSONALIZATION}>

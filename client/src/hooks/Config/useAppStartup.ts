@@ -34,6 +34,12 @@ export default function useAppStartup({
 
   useSpeechSettingsInit(!!user);
 
+  // Force disable speech settings in local storage
+  useEffect(() => {
+    localStorage.setItem('speechToText', 'false');
+    localStorage.setItem('textToSpeech', 'false');
+  }, []);
+
   /** Set the app title */
   useEffect(() => {
     const appTitle = startupConfig?.appTitle ?? '';
