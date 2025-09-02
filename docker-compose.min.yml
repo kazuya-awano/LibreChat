@@ -1,0 +1,25 @@
+services:
+  api:
+    ports:
+      - "${PORT}:${PORT}"
+    depends_on:
+      - mongodb
+    image: ghcr.io/danny-avila/librechat-dev:latest
+    network_mode: host
+    environment:
+      - HOST=0.0.0.0
+      - MONGO_URI=mongodb://localhost:27017/LibreChat
+    volumes:
+      - type: bind
+        source: ./.env
+        target: /app/.env
+      - type: bind
+        source: ./librechat.yaml
+        target: /app/librechat.yaml
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data-node:/data/db
+    command: mongod --noauth
